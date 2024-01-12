@@ -1,32 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.App {
-    background-color: #e9eef2;
-}
-li {
-  list-style: none;
-  padding: 10px;
-  
-}
-span{
-    margin-left: 35px;
-    padding-left: 30px;
-    border-radius: 10px;
-    padding: 9px;
-}
-.patreon{
-    border: 1px solid #F1465A;
-    padding: 6px;
-    background-color: #F1465A;
-    color: white;
-    
-}
-span + span{
-    margin-left: 10px;
-}
 
-.game-image {
-    height: 200px;
-    object-fit: cover;
+
+body{
+    font-family: 'Inter', sans-serif;
 }
