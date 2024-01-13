@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Games from "./games";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
 function Allgames() {
   useParams();
   const [search, setsearch] = useState([]);
@@ -138,16 +138,20 @@ function Allgames() {
             {/* this is the search resulte  */}
             <div className=" absolute  w-full px-1 mt-3 bg-slate-950 text-white rounded-md flex flex-col ">
               {gamesName &&
-                search.slice(0, 10).map((game) => (
+                search.slice(0, 5).map((game) => (
+                  // search
+                  <Link to={`/game/${game.id}`}>
                   <div
                     key={game.id}
                     className="flex flex-row  justify-start py-1 items-center gap-4   "
                   >
-                    <img
-                      className="  aspect-video w-[50px] h-[70px] object-cover rounded-md"
-                      src={game.background_image}
-                      alt="background image"
-                    />
+                    
+                      <img
+                        className="  aspect-video w-[50px] h-[70px] object-cover rounded-md"
+                        src={game.background_image}
+                        alt="background image"
+                      />
+                    
                     <div className=" flex flex-col items-start justify-start ">
                       <p className=" truncate  ">{game.name}</p>
                       <span className="flex  gap-2">
@@ -161,6 +165,7 @@ function Allgames() {
                       </span>
                     </div>
                   </div>
+                  </Link>
                 ))}
             </div>
             {/* end of the l3adab  */}
