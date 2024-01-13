@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Games from "./games";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 function Allgames() {
+  useParams();
+  const [search, setsearch] = useState([]);
+  const [gamesName, setgamesName] = useState("");
+  // const [searchPerformed, setSearchPerformed] = useState(false);
+
+  const apiKey = "7c591a53feab44b1b15867c2f86721e0";
+  const searchGame = () => {
+    const url = `https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(
+      gamesName
+    )}`;
+
+    // Make the API request
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setsearch(data.results);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    // setSearchPerformed(true);
+  };
+  console.log(search);
+  console.log(gamesName);
+
   return (
     <div className="mt-20 md:w-[80%] w-full  flex gap-5 justify-center items-start  ">
       {/* games category and ..... */}
@@ -24,36 +51,128 @@ function Allgames() {
           Platform
         </div>
         <div className="flex justify-start items-center gap-2 mt-2">
-          <svg width="19" height="19" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.14921 3.99996C2.14921 2.97778 2.97784 2.14915 4.00002 2.14915C5.02219 2.14915 5.85083 2.97778 5.85083 3.99996C5.85083 5.02213 5.02219 5.85077 4.00002 5.85077C2.97784 5.85077 2.14921 5.02213 2.14921 3.99996ZM4.00002 1.24915C2.48079 1.24915 1.24921 2.48073 1.24921 3.99996C1.24921 5.51919 2.48079 6.75077 4.00002 6.75077C5.51925 6.75077 6.75083 5.51919 6.75083 3.99996C6.75083 2.48073 5.51925 1.24915 4.00002 1.24915ZM5.82034 11.0001L2.49998 12.8369V9.16331L5.82034 11.0001ZM2.63883 8.21159C2.17228 7.9535 1.59998 8.29093 1.59998 8.82411V13.1761C1.59998 13.7093 2.17228 14.0467 2.63883 13.7886L6.57235 11.6126C7.05389 11.3462 7.05389 10.654 6.57235 10.3876L2.63883 8.21159ZM8.30001 9.00003C8.30001 8.61343 8.61341 8.30003 9.00001 8.30003H13C13.3866 8.30003 13.7 8.61343 13.7 9.00003V13C13.7 13.3866 13.3866 13.7 13 13.7H9.00001C8.61341 13.7 8.30001 13.3866 8.30001 13V9.00003ZM9.20001 9.20003V12.8H12.8V9.20003H9.20001ZM13.4432 2.19311C13.6189 2.01737 13.6189 1.73245 13.4432 1.55671C13.2675 1.38098 12.9826 1.38098 12.8068 1.55671L11 3.36353L9.19321 1.55674C9.01748 1.381 8.73255 1.381 8.55682 1.55674C8.38108 1.73247 8.38108 2.0174 8.55682 2.19313L10.3636 3.99992L8.55682 5.80671C8.38108 5.98245 8.38108 6.26737 8.55682 6.44311C8.73255 6.61885 9.01748 6.61885 9.19321 6.44311L11 4.63632L12.8068 6.44314C12.9826 6.61887 13.2675 6.61887 13.4432 6.44314C13.6189 6.2674 13.6189 5.98247 13.4432 5.80674L11.6364 3.99992L13.4432 2.19311Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path> </svg>
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2.14921 3.99996C2.14921 2.97778 2.97784 2.14915 4.00002 2.14915C5.02219 2.14915 5.85083 2.97778 5.85083 3.99996C5.85083 5.02213 5.02219 5.85077 4.00002 5.85077C2.97784 5.85077 2.14921 5.02213 2.14921 3.99996ZM4.00002 1.24915C2.48079 1.24915 1.24921 2.48073 1.24921 3.99996C1.24921 5.51919 2.48079 6.75077 4.00002 6.75077C5.51925 6.75077 6.75083 5.51919 6.75083 3.99996C6.75083 2.48073 5.51925 1.24915 4.00002 1.24915ZM5.82034 11.0001L2.49998 12.8369V9.16331L5.82034 11.0001ZM2.63883 8.21159C2.17228 7.9535 1.59998 8.29093 1.59998 8.82411V13.1761C1.59998 13.7093 2.17228 14.0467 2.63883 13.7886L6.57235 11.6126C7.05389 11.3462 7.05389 10.654 6.57235 10.3876L2.63883 8.21159ZM8.30001 9.00003C8.30001 8.61343 8.61341 8.30003 9.00001 8.30003H13C13.3866 8.30003 13.7 8.61343 13.7 9.00003V13C13.7 13.3866 13.3866 13.7 13 13.7H9.00001C8.61341 13.7 8.30001 13.3866 8.30001 13V9.00003ZM9.20001 9.20003V12.8H12.8V9.20003H9.20001ZM13.4432 2.19311C13.6189 2.01737 13.6189 1.73245 13.4432 1.55671C13.2675 1.38098 12.9826 1.38098 12.8068 1.55671L11 3.36353L9.19321 1.55674C9.01748 1.381 8.73255 1.381 8.55682 1.55674C8.38108 1.73247 8.38108 2.0174 8.55682 2.19313L10.3636 3.99992L8.55682 5.80671C8.38108 5.98245 8.38108 6.26737 8.55682 6.44311C8.73255 6.61885 9.01748 6.61885 9.19321 6.44311L11 4.63632L12.8068 6.44314C12.9826 6.61887 13.2675 6.61887 13.4432 6.44314C13.6189 6.2674 13.6189 5.98247 13.4432 5.80674L11.6364 3.99992L13.4432 2.19311Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+            ></path>{" "}
+          </svg>
           Store
         </div>
 
         <div className="flex justify-start items-center gap-2 mt-2">
-        <svg  width="19" height="19" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.30902 1C2.93025 1 2.58398 1.214 2.41459 1.55279L1.05279 4.27639C1.01807 4.34582 1 4.42238 1 4.5V13C1 13.5523 1.44772 14 2 14H13C13.5523 14 14 13.5523 14 13V4.5C14 4.42238 13.9819 4.34582 13.9472 4.27639L12.5854 1.55281C12.416 1.21403 12.0698 1.00003 11.691 1.00003L7.5 1.00001L3.30902 1ZM3.30902 2L7 2.00001V4H2.30902L3.30902 2ZM8 4V2.00002L11.691 2.00003L12.691 4H8ZM7.5 5H13V13H2V5H7.5ZM5.5 7C5.22386 7 5 7.22386 5 7.5C5 7.77614 5.22386 8 5.5 8H9.5C9.77614 8 10 7.77614 10 7.5C10 7.22386 9.77614 7 9.5 7H5.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-         Collection
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.30902 1C2.93025 1 2.58398 1.214 2.41459 1.55279L1.05279 4.27639C1.01807 4.34582 1 4.42238 1 4.5V13C1 13.5523 1.44772 14 2 14H13C13.5523 14 14 13.5523 14 13V4.5C14 4.42238 13.9819 4.34582 13.9472 4.27639L12.5854 1.55281C12.416 1.21403 12.0698 1.00003 11.691 1.00003L7.5 1.00001L3.30902 1ZM3.30902 2L7 2.00001V4H2.30902L3.30902 2ZM8 4V2.00002L11.691 2.00003L12.691 4H8ZM7.5 5H13V13H2V5H7.5ZM5.5 7C5.22386 7 5 7.22386 5 7.5C5 7.77614 5.22386 8 5.5 8H9.5C9.77614 8 10 7.77614 10 7.5C10 7.22386 9.77614 7 9.5 7H5.5Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          Collection
         </div>
         <div className="flex justify-start items-center gap-2 mt-2">
-        <svg width="19" height="19" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 2V1H10V2H5ZM4.75 0C4.33579 0 4 0.335786 4 0.75V1H3.5C2.67157 1 2 1.67157 2 2.5V12.5C2 13.3284 2.67157 14 3.5 14H11.5C12.3284 14 13 13.3284 13 12.5V2.5C13 1.67157 12.3284 1 11.5 1H11V0.75C11 0.335786 10.6642 0 10.25 0H4.75ZM11 2V2.25C11 2.66421 10.6642 3 10.25 3H4.75C4.33579 3 4 2.66421 4 2.25V2H3.5C3.22386 2 3 2.22386 3 2.5V12.5C3 12.7761 3.22386 13 3.5 13H11.5C11.7761 13 12 12.7761 12 12.5V2.5C12 2.22386 11.7761 2 11.5 2H11Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-            Review
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 2V1H10V2H5ZM4.75 0C4.33579 0 4 0.335786 4 0.75V1H3.5C2.67157 1 2 1.67157 2 2.5V12.5C2 13.3284 2.67157 14 3.5 14H11.5C12.3284 14 13 13.3284 13 12.5V2.5C13 1.67157 12.3284 1 11.5 1H11V0.75C11 0.335786 10.6642 0 10.25 0H4.75ZM11 2V2.25C11 2.66421 10.6642 3 10.25 3H4.75C4.33579 3 4 2.66421 4 2.25V2H3.5C3.22386 2 3 2.22386 3 2.5V12.5C3 12.7761 3.22386 13 3.5 13H11.5C11.7761 13 12 12.7761 12 12.5V2.5C12 2.22386 11.7761 2 11.5 2H11Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          Review
         </div>
-
-
       </div>
       {/* all games  */}
-      <div className="w-[80%]">
-        <div>
-          <h1 className="text-3xl mb-5 font-bold">All Games</h1>
+      <div className="w-[80%]  ">
+        {/* search and the h1  */}
+        <div className="flex justify-between text-center">
+          <div>
+            <h1 className="text-3xl mb-5 font-bold ">All Games</h1>
+          </div>
+          <div className="relative w-[80%]">
+            <input
+              className="border border-slate-800 rounded-full px-4 py-2 w-full relative  "
+              type="text"
+              name="search"
+              id="search"
+              placeholder="search the game "
+              onChange={(e) => setgamesName(e.target.value)}
+            />
+            <button onClick={searchGame} className=" absolute  right-3 top-1">
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+            {/* this is the search resulte  */}
+            <div className=" absolute  w-full px-1 mt-3 bg-slate-950 text-white rounded-md flex flex-col ">
+              {gamesName &&
+                search.slice(0, 10).map((game) => (
+                  <div
+                    key={game.id}
+                    className="flex flex-row  justify-start py-1 items-center gap-4   "
+                  >
+                    <img
+                      className="  aspect-video w-[50px] h-[70px] object-cover rounded-md"
+                      src={game.background_image}
+                      alt="background image"
+                    />
+                    <div className=" flex flex-col items-start justify-start ">
+                      <p className=" truncate  ">{game.name}</p>
+                      <span className="flex  gap-2">
+                        {game.genres.map((sulg) => {
+                          return (
+                            <p className="px-2 text-xs rounded-md border border-white ">
+                              {sulg.name}
+                            </p>
+                          );
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            {/* end of the l3adab  */}
+          </div>
         </div>
 
-        <div className="  w-full">
+        <div className="w-full">
           <Games />
         </div>
       </div>
     </div>
-    
-
-);
+  );
 }
-
 
 export default Allgames;

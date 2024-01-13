@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-function Games() {
+function Games(props) {
+  const search = props.search;
   const [games, setGames] = useState([]);
 
   useEffect(() => {

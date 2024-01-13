@@ -7,7 +7,7 @@ function Nav() {
     handleShow(!show);
   }
   return (
-    <nav className="flex w-full md:w-[70%] bg-white/25 backdrop-blur-sm  fixed top-2 justify-between items-center gap-2 z-50">
+    <nav className="flex w-full md:w-[70%] bg-white/25 backdrop-blur-sm   fixed top-2 justify-between items-center gap-2 z-50">
       <h1 className="p-[10px] text-lg font-bold tracking-[0.25rem]">
       <Link to={'/'}>
       <strong className="text-red-500 border-b-2 border-red-500 ">
