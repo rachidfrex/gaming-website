@@ -6,7 +6,6 @@ function Allgames() {
   useParams();
   const [search, setsearch] = useState([]);
   const [gamesName, setgamesName] = useState("");
-  // const [searchPerformed, setSearchPerformed] = useState(false);
 
   const apiKey = "7c591a53feab44b1b15867c2f86721e0";
   const searchGame = () => {
@@ -26,7 +25,6 @@ function Allgames() {
     // setSearchPerformed(true);
   };
   console.log(search);
-  console.log(gamesName);
 
   return (
     <div className="mt-20 md:w-[80%] w-full  flex gap-5 justify-center items-start  ">

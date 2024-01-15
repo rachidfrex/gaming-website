@@ -4,6 +4,7 @@ import Gamesdait from './components/gamesdait';
 import Allgames from './components/allgames';
 import Nav from './components/nav';
 import { Routes, Route } from 'react-router-dom';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           <Route path="/games" element={<Allgames/>}/>
 
       </Routes>
+      <Footer />
+
       
       
     </div>
