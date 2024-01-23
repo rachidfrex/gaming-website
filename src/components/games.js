@@ -19,7 +19,7 @@ function Games(props) {
     fetchData();
   }, []);
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4  gid  ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  gid  ">
       {games.map((game) => (
         <div
           key={game.id}

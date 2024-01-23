@@ -3,7 +3,7 @@ import supermario from "../img/supermario.png";
 function Main() {
   return (
     <div className="overflow-hidden flex justify-center  ">
-      <div className="flex  justify-center items-center  xl:mx-[260px] mt-20    ">
+      <div className="flex  justify-center items-center  lg:mx-[190px] xl:mx-[260px] mt-20    ">
         <div className="w-[70%] my-10   ">
           <h1 className="text-5xl text-slate-800 font-bold">
             Explore the best Video Games website
@@ -36,7 +36,7 @@ function Main() {
             src="fort.png"
             alt="Description of the image  "
             width={400}
-            className=" ml-12 mt-10 "
+            className=" ml-12 mt-10 hidden lg:block"
           />
         </div>
       </div>
