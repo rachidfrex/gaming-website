@@ -1,6 +1,7 @@
 import Games from "./games";
 
-function Ready() {
+function Ready(props) {
+  let aray = props.aray;
 
   return (
     <div className="  md:w-[70%]  w-full mt-6  ">
@@ -8,7 +9,9 @@ function Ready() {
       <div className=" mx-10 md:mx-0 flex justify-center items-center  ">
         
         <Games />
+       
       </div>
+     
     </div>
   );
 }
