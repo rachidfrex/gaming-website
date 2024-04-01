@@ -136,7 +136,7 @@ function Allgames() {
             {/* this is the search resulte  */}
             <div className=" absolute  w-full px-1 mt-3 bg-slate-950 text-white rounded-md flex flex-col ">
               {gamesName &&
-                search.slice(0, 5).map((game) => (
+                search.slice(0, 8).map((game) => (
                   // search
                   <Link to={`/game/${game.id}`}>
                   <div
@@ -171,7 +171,7 @@ function Allgames() {
         </div>
 
         <div className="w-full">
-          <Games />
+        <Games />
         </div>
       </div>
     </div>
