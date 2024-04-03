@@ -16,6 +16,9 @@ function Gamesdait() {
       const data = await res.json();
       setGame(data);
       console.log(data);
+      caches((error)=>{
+        console.error("Error:", error)
+      })
     };
     const fetchscreenshots = async () => {
       const res = await fetch(

@@ -6,21 +6,26 @@ import { useEffect } from "react";
 function Games(props) {
   const search = props.search;
   const [games, setGames] = useState([]);
+  const [isloading , setIsloading]= useState(false)
+  
+  const fetchData = async () => {
+    const resp = await axios.get(
+      "https://api.rawg.io/api/games?key=7c591a53feab44b1b15867c2f86721e0&dates=2020-12-19,2021-12-21"
+    );
 
+    setGames(resp.data.results);
+    // console.log(resp.data.results);
+   
+
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const resp = await axios.get(
-        "https://api.rawg.io/api/games?key=7c591a53feab44b1b15867c2f86721e0&dates=2020-12-19,2021-12-21"
-      );
-
-      setGames(resp.data.results);
-      console.log(resp.data.results);
-    };
     fetchData();
   }, []);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  gid  ">
-      {games.map((game) => (
+      {!isloading? 
+      <p>loading ...</p>:
+      games.map((game) => (
         <div
           key={game.id}
           className="overflow-hidden   w-full col-span-1  flex flex-col gap-3 justify-start items-center"
@@ -72,6 +77,7 @@ function Games(props) {
           </div>
         </div>
       ))}
+    
     </div>
   );
 }
