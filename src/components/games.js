@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import Skeleton from "../components/Skeleton";
 function Games(props) {
   const search = props.search;
   const [games, setGames] = useState([]);
@@ -25,9 +26,37 @@ function Games(props) {
     fetchData();
   }, []);
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  gid  ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4   ">
       {!isloading? 
-      <p>loading ...</p>:
+      <div 
+      className="   w-full "
+      >
+      <div
+      className="   w-full col-span-1  flex flex-row gap-4 justify-start items-center" 
+      >
+
+      <Skeleton />
+      <Skeleton />
+      <Skeleton />
+      <Skeleton />
+      </div>
+      <div
+      className="   w-full col-span-1  flex flex-row gap-4 justify-start items-center mt-6" 
+      >
+
+      <Skeleton />
+      <Skeleton />
+      <Skeleton />
+      <Skeleton />
+      </div>
+
+      
+      </div>
+      
+      
+      
+      
+      :
       games.map((game) => (
         <div
           key={game.id}
