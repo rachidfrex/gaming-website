@@ -7,6 +7,8 @@ function Games(props) {
   const search = props.search;
   const [games, setGames] = useState([]);
   const [isloading , setIsloading]= useState(false)
+ 
+
   
   const fetchData = async () => {
     const resp = await axios.get(
@@ -15,6 +17,7 @@ function Games(props) {
 
     setGames(resp.data.results);
     // console.log(resp.data.results);
+    setIsloading(true)
    
 
   };
